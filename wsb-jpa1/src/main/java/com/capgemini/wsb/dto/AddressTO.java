@@ -1,6 +1,8 @@
 package com.capgemini.wsb.dto;
 
-public class AddressTO
+import java.io.Serializable;
+
+public class AddressTO implements Serializable
 {
     private Long id;
 
