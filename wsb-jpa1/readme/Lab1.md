@@ -7,6 +7,8 @@
 4. Po zalogowaniu sie do bazy H2 pojawi sie ponizszy interfejs graficzny z listingiem wszystkich tabel (po lewej) oraz miejscem na wprowadzania komend sql
 ![](H2_console_tables.png)
 5. Jesli zmieniasz nazwy tabel, pamietaj o wywolaniu komendy "drop all objects" - inaczej hibernate utworzy na nowo tylko znane mu aktualnie tabele, zostawiajac poprzednie nietkniete, co moze byc mocno mylace.
-6. Zapoznaj sie z ponizszym schematem relacyjnym bazy danych. Korzystajac z wiedzy przekazanej na wykladzie, literatury oraz internetu uzupelnij brakujace relacje w aktualnej definicji encji (zwroc uwage takze na nazwy tabel). Okresl nullowalnosc kolumn i kaskady.
-![](db_schema.png)
+6. Zapoznaj sie z ponizszym schematem relacyjnym bazy danych. Korzystajac z wiedzy przekazanej na wykladzie, literatury oraz internetu uzupelnij brakujace relacje w aktualnej definicji encji (zwroc uwage takze na nazwy tabel). Okresl nullowalnosc kolumn i kaskady. 
+Ustaw relacje tak, aby przynajmniej raz byla wykorzystana relacja jednostronna i dwustronna.
+Przy kazdej relacji napisz jako komentarz czy jest to relacja jednostronna od strony rodzica (wlasciciela relacji), jednostronna od strony dziecka, czy dwustronna.
+   ![](db_schema.png)
 7. Uzupelnij plik data.sql danymi (komendy insert) w odpowiedniej kolejnosci potwierdzajac poprawnosc modelu
