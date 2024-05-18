@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +23,20 @@ public class AddressEntity {
 	private String addressLine2;
 
 	private String postalCode;
+
+
+	// Relacja dwukierunkowa One to one doctorEntity
+	// AdressEntity jest w tym momencie rodzicem relacji
+	@OneToOne
+	@JoinColumn(name = "doctorEntity_id")
+	private DoctorEntity doctorEntity;
+
+
+	// Relacja dwukierunkowa One to one PatientEntity
+	// AdressEntity jest w tym momencie rodzicem relacji
+	@OneToOne
+	@JoinColumn(name= "patientEntity_id")
+	private PatientEntity patientEntity;
 
 	public Long getId() {
 		return id;

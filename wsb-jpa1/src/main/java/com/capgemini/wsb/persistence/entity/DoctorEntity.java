@@ -2,6 +2,8 @@ package com.capgemini.wsb.persistence.entity;
 
 import com.capgemini.wsb.persistence.enums.Specialization;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +11,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -36,6 +41,17 @@ public class DoctorEntity {
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Specialization specialization;
+
+	// Dokończenie relacji dwukierunkowej OneToOne
+	// w tym wypadku Doctor entity jest dzieckiem tej relacji.
+	@OneToOne(mappedBy = "doctorEntity")
+	private AddressEntity addressEntity;
+
+	// Relacja jednokierunkowa OneToMany
+	// Jeden rekord pacjenta może mieć wiele rekordów visit. Rodzicem jest DoctorEntity
+	@OneToMany
+	@JoinColumn(name = "doctorEntity_id")
+	private List<VisitEntity> visitEntity;
 
 	public Long getId() {
 		return id;

@@ -1,12 +1,15 @@
 package com.capgemini.wsb.persistence.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +24,19 @@ public class VisitEntity {
 
 	@Column(nullable = false)
 	private LocalDateTime time;
+
+	// Relacja jednokierunkowa której rodzicem jest VisitEntity
+	@OneToMany
+	@JoinColumn(name ="visitEntity_id")
+	private List<MedicalTreatmentEntity> medicalTreatmentEntity;
+
+	public List<MedicalTreatmentEntity> getMedicalTreatmentEntity() {
+		return this.medicalTreatmentEntity;
+	}
+
+	public void setMedicalTreatmentEntity(List<MedicalTreatmentEntity> medicalTreatmentEntity) {
+		this.medicalTreatmentEntity = medicalTreatmentEntity;
+	}
 
 	public Long getId() {
 		return id;

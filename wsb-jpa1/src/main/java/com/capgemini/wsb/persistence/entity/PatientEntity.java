@@ -1,12 +1,17 @@
 package com.capgemini.wsb.persistence.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +38,35 @@ public class PatientEntity {
 
 	@Column(nullable = false)
 	private LocalDate dateOfBirth;
+
+
+	// Dokończenie relacji dwukierunkowej OneToOne
+	// w tym wypadku Patient entity jest dzieckiem tej relacji.
+	@OneToOne(mappedBy = "patientEntity",cascade = CascadeType.REMOVE)
+	private AddressEntity addressEntity;
+
+	// Relacja jednokierunkowa OneToMany
+	// Jeden rekord pacjenta może mieć wiele rekordów visit. Rodzicem jest PatientEntity
+	@OneToMany
+	@JoinColumn(name = "patientEntity_id")
+	private List<VisitEntity> visitEntity;
+
+	
+	public AddressEntity getAddressEntity() {
+		return this.addressEntity;
+	}
+
+	public void setAddressEntity(AddressEntity addressEntity) {
+		this.addressEntity = addressEntity;
+	}
+
+	public List<VisitEntity> getVisitEntity() {
+		return this.visitEntity;
+	}
+
+	public void setVisitEntity(List<VisitEntity> visitEntity) {
+		this.visitEntity = visitEntity;
+	}
 
 	public Long getId() {
 		return id;
